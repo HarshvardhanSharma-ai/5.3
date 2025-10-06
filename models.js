@@ -1,7 +1,4 @@
-// models/ProductCatalog.js
 const mongoose = require('mongoose');
-
-// --- 1. Define the Nested Schema (Variant) ---
 const VariantSchema = new mongoose.Schema({
     color: {
         type: String,
@@ -11,16 +8,16 @@ const VariantSchema = new mongoose.Schema({
     size: {
         type: String,
         required: true,
-        enum: ['S', 'M', 'L', 'XL', 'One Size'] // Restrict size options
+        enum: ['S', 'M', 'L', 'XL', 'One Size'] 
     },
     stock: {
         type: Number,
         required: true,
         min: 0,
     }
-}, { _id: false }); // Optional: Prevents Mongoose from creating an _id for each subdocument
+}, { _id: false }); 
 
-// --- 2. Define the Main Schema (Product) ---
+
 const ProductSchema = new mongoose.Schema({
     name: {
         type: String,
@@ -37,7 +34,7 @@ const ProductSchema = new mongoose.Schema({
         required: true,
         enum: ['T-Shirts', 'Footwear', 'Accessories', 'Electronics']
     },
-    // The key to nesting: define 'variants' as an array of VariantSchema objects
+
     variants: [VariantSchema], 
     
     dateAdded: {
@@ -46,5 +43,6 @@ const ProductSchema = new mongoose.Schema({
     }
 });
 
-const ProductCatalog = mongoose.model('ProductCatalog', ProductSchema, 'products'); // 'products' is the collection name
+const ProductCatalog = mongoose.model('ProductCatalog', ProductSchema, 'products'); 
+
 module.exports = ProductCatalog;
